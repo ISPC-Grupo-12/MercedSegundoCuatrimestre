@@ -21,10 +21,8 @@ Lista de integrantes:
 
 -Lara Gele: mis conocimientos se enfocan en el desarrollo de páginas web utilizando HTML, CSS, JavaScript y React. Realizó diversos proyectos prácticos para afianzar mis conocimientos y habilidades, desde una tienda de hamburguesas hasta una de plantas y flores.
 
--Mayco David Ardiles:
+-Mayco David Ardiles: habilidades de testing de videojuegos, desarrollo web, programador junior, economia y gestion de empresas, electricista nivel 3.
 
--Cintia Paola Osorio Duarte:
+-Cintia Paola Osorio Duarte:Conocimientos en ux/ui , testing manual y QA, entreno IA, figma, canva, krita estudio diseño de videojuegos usando gogot como motor, tambien conocimientos en HTML, Css y JavaScript basico.
 
--Conrrado alvarez:
-
--David Pardo:
+-Conrrado alvarez: Tecnico electricista, tecnico en higiene y seguridad laboral, y actualmente cursando lic. en higiene y saguridad, y la tecnicatura en eficiencia energetica y energia renovable.
