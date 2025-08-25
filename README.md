@@ -25,3 +25,16 @@ Lista de integrantes:
 
 -Conrrado alvarez: Tecnico electricista, tecnico en higiene y seguridad laboral, y actualmente cursando lic. en higiene y saguridad, y la tecnicatura en eficiencia energetica y energia renovable.<br>
 
+Tecnologías utilizadas:<br>
+
+Este proyecto se desarrollará empleando un stack tecnológico variado, que combina herramientas de desarrollo web, programación y gestión de bases de datos:<br>
+
+HTML: para la estructura y el contenido de las páginas web.<br>
+
+CSS: para el diseño visual, estilos y adaptación responsive.<br>
+
+Python: como lenguaje de programación principal para la lógica y funcionalidades del sistema.<br>
+
+MySQL: como sistema de gestión de bases de datos relacional, encargado de almacenar y organizar la información.<br>
+
+WordPress: como plataforma de gestión de contenidos (CMS), que permite integrar y administrar el sitio de forma dinámica y escalable.<br>
