@@ -1,0 +1,6 @@
+/* Todas las imágenes dentro de cualquier carrusel */
+.carousel-inner img {
+    width: 100%;
+    /* Ocupa todo el ancho */
+    height: 500px;
+    }
