@@ -33,7 +33,6 @@ body{
     color: var(--color-border);
     font-size: 60px;
     text-align: center;
-    border-bottom: solid grey 1px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -61,13 +60,6 @@ main{
     font-family: var(--font-title);
     color: var(--color-red);
     font-size: 35px;
-}
-
-.product-grid{
-    display: flex;
-    flex-direction:row;
-    flex-wrap: wrap;
-    gap: 10px;
 }
 
 /*Tarjetas de producto */
@@ -132,6 +124,36 @@ main{
     border-color: var(--color-red-hover);
     color: #fff;
 }
+
+/* Botón Comprar */
+.btn-primary {
+    background-color: var(--color-red);       
+    border-color: var(--color-border);        
+    font-family: var(--font-title);
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    border-radius: var(--radius);
+    padding: 0.5rem 1.25rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-red-hover); 
+    border-color: var(--color-red-hover);
+    transform: translateY(-2px);              
+}
+
+.btn-primary:active {
+    background-color: var(--color-red-alt) !important; 
+    border-color: var(--color-border) !important;
+    transform: scale(0.97);                   
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 0, 0, 0.5); 
+}
+
 
 /* ===== Footer ===== */
 .site-footer {
