@@ -3,4 +3,20 @@
     width: 100%;
     /* Ocupa todo el ancho */
     height: 500px;
-    }
+}
+
+.icon-metallic-purple {
+    color: #8e44ad;
+    /* base morado */
+    background: linear-gradient(45deg, #8e44ad, #531fb3, #6a1b9a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 
+Usé -webkit-background-clip y -webkit-text-fill-color
+para que el degradado se vea bien en navegadores con motor WebKit 
+(Chrome, Safari, Edge). 
+Sin esto, el texto no mostraría el degradado y quedaría sólido. 
+*/
