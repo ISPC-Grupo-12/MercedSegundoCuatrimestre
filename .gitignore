@@ -1,0 +1,44 @@
+# ---------------------------------------------
+# Ignorar archivos/carpeta generados por Python
+# ---------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+back/programa/oracleJdk-24/
+# ---------------------------------------------
+# Ignorar entornos virtuales
+# ---------------------------------------------
+env/
+venv/
+.venv/
+ENV/
+ENV.bak/
+.ENV/
+
+# ---------------------------------------------
+# Ignorar configuraciones de IDEs y editores
+# ---------------------------------------------
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# ---------------------------------------------
+# Ignorar archivos temporales del sistema operativo
+# ---------------------------------------------
+.DS_Store
+Thumbs.db
+
+# ---------------------------------------------
+# Ignorar logs, bases de datos y archivos temporales
+# ---------------------------------------------
+*.log
+*.sqlite3
+*.db
+*.bak
+
+# ---------------------------------------------
+# Ignorar archivos y carpetas personales o experimentales
+# ---------------------------------------------
+*.swp
+*.tmp
