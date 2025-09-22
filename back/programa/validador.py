@@ -13,24 +13,24 @@ class Validador:
             except ValueError:
                 print("Por favor, ingresá un número válido.\n")
 
-    def validar_email_patron(self, email):
+    def validar_mail_patron(self, mail):
         patron = r"^[\w\.-]+@[\w\.-]+\.\w+$"
-        return re.match(patron, email) is not None
+        return re.match(patron, mail) is not None
 
-    def validar_email_repetido(self, email):
+    def validar_mail_repetido(self, mail):
         conexion = crear_conexion()
         cursor = conexion.cursor()
-        cursor.execute("SELECT 1 FROM usuarios WHERE Email = ?", (email,))
+        cursor.execute("SELECT 1 FROM Usuario WHERE mail = ?", (mail,))
         resultado = cursor.fetchone()
         cursor.close()
         conexion.close()
         return resultado is None  # True si no existe, False si ya está registrado
 
-    def validar_contraseña(self, contraseña):
-        if len(contraseña) < 6:
+    def validar_contrasena(self, contrasena):
+        if len(contrasena) < 6:
             return False
-        contiene_letra = any(caracter.isalpha() for caracter in contraseña)
-        contiene_numeros = any(caracter.isdigit() for caracter in contraseña)
+        contiene_letra = any(caracter.isalpha() for caracter in contrasena)
+        contiene_numeros = any(caracter.isdigit() for caracter in contrasena)
         return contiene_letra and contiene_numeros
 
     def validar_dni(self, dni):
