@@ -1,9 +1,10 @@
+DROP TABLE IF EXISTS Usuario;
 create table Usuario(
 id_usuario INTEGER primary key AUTOINCREMENT,
 nombre text not null,
 apellido text not null,
 mail text not null unique,
-contrasena text not null,
+contraseña text not null,
 rol text not null,
 dni text not null unique
 );
