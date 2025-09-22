@@ -19,13 +19,13 @@ class Menu:
             opcion = self.mostrar_menu(opciones[:])
             if opcion == 1:
                 print("\n🔐 INICIO DE SESIÓN\n".center(50, "-"))
-                email = input("\nIngresar email: ")
-                while not self.validador.validar_email_patron(email):
-                    email = input("\nIngresar un email correcto: ")
-                contraseña = input("Ingresar contraseña: ")
-                while not self.validador.validar_contraseña(contraseña):
-                    contraseña = input("Ingresar una contraseña correcta: ")
-                self.usuario_actual = self.gestor.login_usuario(email, contraseña)
+                mail = input("\nIngresar mail: ")
+                while not self.validador.validar_mail_patron(mail):
+                    mail = input("\nIngresar un mail correcto: ")
+                contrasena = input("Ingresar contrasena: ")
+                while not self.validador.validar_contrasena(contrasena):
+                    contrasena = input("Ingresar una contrasena correcta: ")
+                self.usuario_actual = self.gestor.login_usuario(mail, contrasena)
                 while self.usuario_actual is not None:
                     if self.usuario_actual.es_admin():
                         self.menu_admin()
@@ -42,13 +42,13 @@ class Menu:
                 dni = input("Ingresar número de documento: ")
                 while not self.validador.validar_dni(dni):
                     dni = input("\nIngresar un número de documento válido: ")
-                email = input("Ingrese su email: ")
-                while not self.validador.validar_email_patron(email) or not self.validador.validar_email_repetido(email):
-                    email = input("\nIngresar un email correcto: ")
-                contraseña = input("Ingresar una contraseña que incluya letras y números: ")
-                while not self.validador.validar_contraseña(contraseña):
-                    contraseña = input("Ingresar una contraseña correcta: ")
-                self.gestor.registrar_usuario(nombre, apellido, email, contraseña, dni)
+                mail = input("Ingrese su mail: ")
+                while not self.validador.validar_mail_patron(mail) or not self.validador.validar_mail_repetido(mail):
+                    mail = input("\nIngresar un mail correcto: ")
+                contrasena = input("Ingresar una contrasena que incluya letras y números: ")
+                while not self.validador.validar_contrasena(contrasena):
+                    contrasena = input("Ingresar una contrasena correcta: ")
+                self.gestor.registrar_usuario(nombre, apellido, mail, contrasena, dni)
                 print("✅ Registro exitoso")
             else:
                 print("👋 Hasta luego!")
@@ -112,8 +112,8 @@ class Menu:
             "Modificar el nombre",
             "Modificar el apellido",
             "Modificar el DNI",
-            "Modificar el Gmail",
-            "Modificar la contraseña"
+            "Modificar el mail",
+            "Modificar la contrasena"
         ]
         while True:
             opcion = self.mostrar_menu(opciones[:])
@@ -126,14 +126,14 @@ class Menu:
                     continue
                 nuevo_valor = input(f"Ingrese nuevo valor para «{opciones_datos[dato - 1]}»: ")
                 if dato == 4:
-                    while not self.validador.validar_email_patron(nuevo_valor) or not self.validador.validar_email_repetido(nuevo_valor):
-                        nuevo_valor = input("Email inválido o en uso, intente nuevamente: ")
+                    while not self.validador.validar_mail_patron(nuevo_valor) or not self.validador.validar_mail_repetido(nuevo_valor):
+                        nuevo_valor = input("mail inválido o en uso, intente nuevamente: ")
                 elif dato == 3:
                     while not self.validador.validar_dni(nuevo_valor):
                         nuevo_valor = input("DNI inválido o en uso, intente nuevamente: ")
                 elif dato == 5:
-                    while not self.validador.validar_contraseña(nuevo_valor):
-                        nuevo_valor = input("Contraseña inválida, intente nuevamente: ")
+                    while not self.validador.validar_contrasena(nuevo_valor):
+                        nuevo_valor = input("Contrasena inválida, intente nuevamente: ")
                 success = self.gestor.modificar_datos(self.usuario_actual.id, dato, nuevo_valor)
                 print("✅ Cambiado correctamente." if success else "❌ No se pudo modificar.")
             else:

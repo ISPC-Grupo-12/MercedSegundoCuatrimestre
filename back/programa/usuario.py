@@ -1,12 +1,12 @@
 from rol import Rol
 class Usuario:
     #contructor
-    def __init__(self, id, nombre, apellido, email, contraseña, dni, rol: Rol):
+    def __init__(self, id, nombre, apellido, mail, contrasena, dni, rol: Rol):
         self.__id = id
         self.__nombre = nombre
         self.__apellido = apellido
-        self.__email = email
-        self.__contraseña = contraseña
+        self.__mail = mail
+        self.__contrasena = contrasena
         self.__rol = rol
         self.__dni = dni
 
@@ -33,18 +33,18 @@ class Usuario:
         self.__apellido = nuevo_apellido
 
     @property
-    def email(self):
-        return self.__email
-    @email.setter
-    def email(self, nuevo_email):
-        self.__email = nuevo_email
+    def mail(self):
+        return self.__mail
+    @mail.setter
+    def mail(self, nuevo_mail):
+        self.__mail = nuevo_mail
 
     @property
-    def contraseña(self):
-        return self.__contraseña
-    @contraseña.setter
-    def contraseña(self, nuevo_contraseña):
-        self.__contraseña = nuevo_contraseña
+    def contrasena(self):
+        return self.__contrasena
+    @contrasena.setter
+    def contrasena(self, nuevo_contrasena):
+        self.__contrasena = nuevo_contrasena
 
     @property
     def rol(self):
@@ -65,9 +65,9 @@ class Usuario:
     def es_admin(self):
         return self.__rol.id == 1  #En vez de revistar un str, revisa el id del Rol
     
-    def validar_login(self, email, contraseña):
-        return self.__email == email and self.__contraseña == contraseña
+    def validar_login(self, mail, contrasena):
+        return self.__mail == mail and self.__contrasena == contrasena
     
     def __str__(self):
-        return f"\nID: {self.__id}\nNombre completo: {self.__apellido}, {self.__nombre}\nDni: {self.__dni}\nEmail: {self.__email}\nRol: {self.__rol}"
+        return f"\nID: {self.__id}\nNombre completo: {self.__apellido}, {self.__nombre}\nDni: {self.__dni}\nmail: {self.__mail}\nRol: {self.__rol}"
 
