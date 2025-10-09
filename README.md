@@ -1,7 +1,7 @@
 # Merced
 
 Logo: <br>
-![Logo de Merced](logo-merced.jpeg)
+![Logo de Merced](docs/README/logo-merced.jpeg)
 
 ## Descripción del proyecto: <br>
 Merced es una marca de ropa que busca exhibir sus productos al mundo a través de una página web que ofrece moda accesible, moderna y global. El proyecto busca resolver la limitación geográfica y los altos costos de mantener su tienda física, transladando la experiencia de comprar a una plataforma online funcional y atractiva. Gracias a esta nueva modalidad, podremos brindar productos de excelente calidad a clientes de todo el mundo, con envíos internacionales y precios accesibles.<br>
