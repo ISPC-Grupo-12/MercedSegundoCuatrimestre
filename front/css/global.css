@@ -22,7 +22,7 @@ body{
     background:var(--color-bg);
     color:var(--color-text);
     font-family:var(--font-body);
-    padding:24px;
+    /* padding:24px; */
     margin:0;
 }
 
@@ -95,4 +95,12 @@ header .nav{
     border-color: var(--color-border) !important;
     font-size: 0.85rem;
     color: var(--color-text-muted);
+}
+
+.social-icon{
+    text-decoration: none;
+}
+.fab-icon{
+    color: #660000;
+  
 }
