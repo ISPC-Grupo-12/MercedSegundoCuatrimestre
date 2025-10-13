@@ -1,15 +1,16 @@
 from rol import Rol
+
 class Usuario:
-    #contructor
     def __init__(self, id, nombre, apellido, mail, contrasena, dni, rol: Rol):
         self.__id = id
         self.__nombre = nombre
         self.__apellido = apellido
         self.__mail = mail
         self.__contrasena = contrasena
-        self.__rol = rol
         self.__dni = dni
+        self.__rol = rol
 
+    # Propiedades
     @property
     def id(self):
         return self.__id
@@ -23,7 +24,6 @@ class Usuario:
     @nombre.setter
     def nombre(self, nuevo_nombre):
         self.__nombre = nuevo_nombre
-
 
     @property
     def apellido(self):
@@ -47,27 +47,31 @@ class Usuario:
         self.__contrasena = nuevo_contrasena
 
     @property
-    def rol(self):
-        return self.__rol
-    @rol.setter
-    def rol(self, nuevo_rol):
-        self.__rol = nuevo_rol
-
-    @property
     def dni(self):
         return self.__dni
     @dni.setter
     def dni(self, nuevo_dni):
         self.__dni = nuevo_dni
 
+    @property
+    def rol(self):
+        return self.__rol
+    @rol.setter
+    def rol(self, nuevo_rol):
+        self.__rol = nuevo_rol
 
-    #métodos 
+    # Métodos
     def es_admin(self):
-        return self.__rol.id == 1  #En vez de revistar un str, revisa el id del Rol
-    
+        return self.__rol.id == 1
+
     def validar_login(self, mail, contrasena):
         return self.__mail == mail and self.__contrasena == contrasena
-    
-    def __str__(self):
-        return f"\nID: {self.__id}\nNombre completo: {self.__apellido}, {self.__nombre}\nDni: {self.__dni}\nmail: {self.__mail}\nRol: {self.__rol}"
 
+    def __str__(self):
+        return (
+            f"\n🆔 ID: {self.__id}"
+            f"\n👤 Nombre completo: {self.__apellido}, {self.__nombre}"
+            f"\n🪪 DNI: {self.__dni}"
+            f"\n📧 Mail: {self.__mail}"
+            f"\n🔐 Rol: {self.__rol}"
+        )
