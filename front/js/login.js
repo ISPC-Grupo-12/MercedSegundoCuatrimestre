@@ -20,11 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
       feedback.innerHTML = `<div class="alert alert-danger">Correo inválido</div>`;
       return;
     }
+  
+  //Credenciales hardcodeadas
+  const usuarioValido = "usuario@merced.com";
+  const contrasenaValida = "12345678";
 
-    feedback.innerHTML = `<div class="alert alert-success">Ingreso correcto (simulación)</div>`;
-    form.reset();
+  if (email === usuarioValido && password === contrasenaValida) {
+    alert("Inicio de sesión exitoso ✅");
+    window.location.href = "index.html"; // Redirigir a la página principal
+  } else {
+    feedback.innerHTML = `<div class="alert alert-danger">Credenciales inválidas</div>`;
+  }
   });
-
+  
   // redes sociales
   document.querySelector('.btn-google').addEventListener('click', () => alert('Google login (simulado)'));
   document.querySelector('.btn-facebook').addEventListener('click', () => alert('Facebook login (simulado)'));
