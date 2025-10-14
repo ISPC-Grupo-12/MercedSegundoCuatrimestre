@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Merced — Nombre del Producto</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+
+    <!--CSS global -->
+    <link rel="stylesheet" href="../css/global.css">
+    <!-- CSS específico de producto -->
+
+</head>
+<body>
+    <header>
+        <h1 id="header-titulo">Merced</h1>
+
+        <ul class="nav justify-content-end pe-5 gap-5">
+            <li><a href="../registro.html"><i class="fa-solid fa-user-plus fab-icon font-size fa-2x"></i></a></li>
+            <li><a href="../login.html"><i class="fa-solid fa-user fab-icon font-size fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa-solid fa-cart-shopping fab-icon font-size fa-2x"></i></a></li>
+        </ul>
+
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="../productos.html" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">Productos</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="../productos.html">Todos los productos</a></li>
+                    <li><a class="dropdown-item" href="#">Sección 2</a></li>
+                    <li><a class="dropdown-item" href="#">Sección 3</a></li>
+                    <li><a class="dropdown-item" href="#">Sección 4</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Quizás algo más</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../sobre_nosotros.html">Sobre Nosotros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../contacto.html">Contacto</a>
+            </li>
+        </ul>
+    </header>
+
+    <main class="producto container py-4">
+        <nav class="mb-3" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../productos.html">Productos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nombre del Producto</li>
+            </ol>
+        </nav>
+
+        <div class="row g-4">
+            <!-- Galería -->
+            <section class="col-12 col-lg-6">
+                <div class="producto-media card">
+                    <div class="ratio ratio-1x1">
+                        <img id="imgPrincipal" class="producto-img" src="../img/productos/campera_algodon/campera_algodon.jpeg" alt="campera de algodon con botones - imagen principal">
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Info -->
+            <section class="col-12 col-lg-6">
+                <h1 class="producto-titulo" >Campera de algodon con botones</h1>
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="text-warning" aria-label="Valoración 4.6 de 5">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <span class="small text-muted">(128 opiniones)</span>
+                </div>
+                <div class="d-flex align-items-baseline gap-3 mb-3">
+                    <span class="producto-precio">$ 100.990</span>
+                    <span class="producto-precio-antes text-muted"><del>$ 130.990</del></span>
+                    <span class="badge stock-ok">En stock</span>
+                </div>
+                <form class="producto-form" action="#" method="post">
+                    <fieldset class="mb-3">
+                        <legend class="form-label">Talle</legend>
+                        <div class="talles">
+                            <input class="btn-check" type="radio" name="talle" id="talle-s" value="S" checked>
+                            <label class="talle" for="talle-s">S</label>
+
+                            <input class="btn-check" type="radio" name="talle" id="talle-m" value="M">
+                            <label class="talle" for="talle-m">M</label>
+
+                            <input class="btn-check" type="radio" name="talle" id="talle-l" value="L">
+                            <label class="talle" for="talle-l">L</label>
+
+                            <input class="btn-check" type="radio" name="talle" id="talle-xl" value="XL">
+                            <label class="talle" for="talle-xl">XL</label>
+                        </div>
+                    </fieldset>
+        
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <label for="cantidad" class="form-label m-0">Cantidad</label>
+                        <input id="cantidad" name="cantidad" type="number" class="form-control cantidad" min="1" value="1" inputmode="numeric" pattern="[0-9]*">
+                        <span class="form-text">Límite 5 por compra</span>
+                    </div>
+        
+                    <div class="d-grid d-sm-flex gap-2">
+                        <button type="submit" class="btn btn-comprar">
+                            <i class="fa-solid fa-bag-shopping me-2"></i>Agregar al carrito
+                        </button>
+                        <a href="#" class="btn btn-primario">Comprar ahora</a>
+                    </div>
+        
+                    <ul class="list-unstyled d-grid gap-2 mt-4 small text-muted">
+                        <li><i class="fa-solid fa-truck me-2"></i>Envíos a todo el país</li>
+                        <li><i class="fa-solid fa-rotate-left me-2"></i>Cambios gratis por 30 días</li>
+                        <li><i class="fa-solid fa-shield-halved me-2"></i>Pago seguro</li>
+                    </ul>
+                </form>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <!-- Columna 1: Marca -->
+                <div class="col-md-4 mb-4 mb-md-0 text-center text-md-start">
+                    <h3 class="footer-title">Merced</h3>
+                    <p class="footer-text">Moda gótica con identidad propia. Inspirada en la oscuridad, diseñada para
+                        destacar.</p>
+                </div>
+                <!-- Columna 2: Links -->
+                <div class="col-md-4 mb-4 mb-md-0 text-center">
+                    <h5 class="footer-subtitle">Navegación</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="../index.html" class="footer-link">Inicio</a></li>
+                        <li><a href="../productos.html" class="footer-link">Productos</a></li>
+                        <li><a href="../contacto.html" class="footer-link">Contacto</a></li>
+                        <li><a href="../sobre_nosotros.html" class="footer-link">Sobre nosotros</a></li>
+                    </ul>
+                </div>
+                <!-- Columna 3: Redes -->
+                <section class="socials py-4" style="background-color: #111;">
+                    <div class="container text-center">
+                        <h5 class="text-white mb-3">Seguinos en nuestras redes</h5>
+                        <a href="https://www.instagram.com" target="_blank" class="social-icon me-3">
+                            <i class="fab fa-instagram fa-2x fab-icon"></i>
+                        </a>
+                        <a href="https://www.twitter.com" target="_blank" class="social-icon me-3">
+                            <i class="fab fa-twitter fa-2x fab-icon"></i>
+                        </a>
+                        <a href="https://www.facebook.com" target="_blank" class="social-icon">
+                            <i class="fab fa-facebook fa-2x fab-icon"></i>
+                        </a>
+                    </div>
+                </section>
+
+                <div class="footer-bottom text-center mt-4 pt-3 border-top">
+                    <small>&copy; 2025 Merced. Todos los derechos reservados.</small>
+                </div>
+            </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
