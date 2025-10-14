@@ -1,7 +1,6 @@
 /* styles.css */
-body {
+.form-container {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,26 +8,27 @@ body {
     margin: 0;
 }
 
-.form-container {
-    background: #ffffff;
+.form-content {
+    background-color: #490707;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 300px;
 }
 
-h2 {
+.form-container h2 {
+    font-size: 1.5em;
     text-align: center;
     margin-bottom: 20px;
 }
 
-label {
+.form-container label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-input {
+.form-container input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -36,21 +36,21 @@ input {
     border-radius: 4px;
 }
 
-button {
+.form-container button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #a00d0d;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
+.form-container button:hover {
+    background-color: #7a0a0a;
 }
 
-.error-message {
+.form-container.error-message {
     color: red;
     font-size: 0.9em;
     text-align: center;
