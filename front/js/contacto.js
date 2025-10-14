@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     feedback.innerHTML = `<div class="alert alert-success" role="alert">Gracias ${data.name}, tu mensaje fue enviado correctamente.</div>`;
 
     
-    form.reset();
+    form.submit();
 
     
   });

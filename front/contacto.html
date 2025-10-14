@@ -18,40 +18,40 @@
 <body class="background-color black">
 
   <header>
-        <h1 id="header-titulo">Merced</h1>
+    <h1 id="header-titulo">Merced</h1>
 
-        <ul class="nav justify-content-end pe-5 gap-5">
-            <li><a href="registro.html"><i class="fa-solid fa-user-plus fab-icon font-size fa-2x"></i></a></li>
-            <li><a href="login.html"><i class="fa-solid fa-user fab-icon font-size fa-2x"></i></a></li>
-            <li><a href="#"><i class="fa-solid fa-cart-shopping fab-icon font-size fa-2x"></i></a></li>
-        </ul>
+    <ul class="nav justify-content-end pe-5 gap-5">
+      <li><a href="registro.html"><i class="fa-solid fa-user-plus fab-icon font-size fa-2x"></i></a></li>
+      <li><a href="login.html"><i class="fa-solid fa-user fab-icon font-size fa-2x"></i></a></li>
+      <li><a href="#"><i class="fa-solid fa-cart-shopping fab-icon font-size fa-2x"></i></a></li>
+    </ul>
 
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="productos.html" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">Productos</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="productos.html">Todos los productos</a></li>
-                    <li><a class="dropdown-item" href="#">Sección 2</a></li>
-                    <li><a class="dropdown-item" href="#">Sección 3</a></li>
-                    <li><a class="dropdown-item" href="#">Sección 4</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Quizás algo más</a></li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="sobre_nosotros.html">Sobre Nosotros</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contacto.html">Contacto</a>
-            </li>
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="productos.html" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">Productos</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="productos.html">Todos los productos</a></li>
+          <li><a class="dropdown-item" href="#">Sección 2</a></li>
+          <li><a class="dropdown-item" href="#">Sección 3</a></li>
+          <li><a class="dropdown-item" href="#">Sección 4</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">Quizás algo más</a></li>
         </ul>
-    </header>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="sobre_nosotros.html">Sobre Nosotros</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="contacto.html">Contacto</a>
+      </li>
+    </ul>
+  </header>
 
   <main class="login-container py-5">
     <div class="row justify-content-center">
@@ -61,18 +61,18 @@
           <div class="card-body p-4">
             <h2 class="card-title text-center mb-3">Contáctanos</h2>
 
-            <form id="contactForm" novalidate>
+            <form id="contactForm" action="https://formsubmit.co/dileoluciano12@gmail.com" method="POST" novalidate>
               <div class="row g-3">
                 <div class="col-12 col-md-6">
                   <label for="name" class="form-label">Nombre</label>
-                  <input type="text" id="name" name="name" class="form-control" placeholder="Tu nombre" 
-                  minlength="2" maxlength="30" pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" required>
+                  <input type="text" id="name" name="name" class="form-control" placeholder="Tu nombre" minlength="2"
+                    maxlength="30" pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" required>
                 </div>
 
                 <div class="col-12 col-md-6">
                   <label for="apellido" class="form-label">Apellido</label>
                   <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Tu apellido"
-                     minlength="2" maxlength="30" pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" required>
+                    minlength="2" maxlength="30" pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" required>
                 </div>
 
                 <div class="col-12">
@@ -98,6 +98,13 @@
                   <textarea id="message" name="message" rows="4" class="form-control"
                     placeholder="Escribe tu mensaje..." required></textarea>
                 </div>
+
+                <!-- CONFIGURACIÓN DE FORMSUBMIT -->
+                <input type="hidden" name="_subject" value="Nuevo mensaje desde la web de Merced">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://tiendamerced.fwh.is">
+
 
                 <div class="col-12">
                   <button type="submit" class="btn btn-danger w-100 fw-bold">Enviar</button>
