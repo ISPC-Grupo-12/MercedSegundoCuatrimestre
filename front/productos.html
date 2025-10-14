@@ -20,22 +20,29 @@
 
     <!-- Tu CSS personalizado -->
     <link rel="stylesheet" href="../front/css/global.css">
-    <link rel="stylesheet" href="../front/css/productos.css">
+    <!-- <link rel="stylesheet" href="../front/css/productos.css"> -->
 
 </head>
 
 <body>
     <header>
         <h1 id="header-titulo">Merced</h1>
+
+        <ul class="nav justify-content-end pe-5 gap-5">
+            <li><a href="registro.html"><i class="fa-solid fa-user-plus fab-icon font-size fa-2x"></i></a></li>
+            <li><a href="login.html"><i class="fa-solid fa-user fab-icon font-size fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa-solid fa-cart-shopping fab-icon font-size fa-2x"></i></a></li>
+        </ul>
+
         <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="front/productos.html" role="button" data-bs-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="productos.html" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">Productos</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Sección 1</a></li>
+                    <li><a class="dropdown-item" href="productos.html">Todos los productos</a></li>
                     <li><a class="dropdown-item" href="#">Sección 2</a></li>
                     <li><a class="dropdown-item" href="#">Sección 3</a></li>
                     <li><a class="dropdown-item" href="#">Sección 4</a></li>
@@ -212,9 +219,10 @@
                 <div class="col-md-4 mb-4 mb-md-0 text-center">
                     <h5 class="footer-subtitle">Navegación</h5>
                     <ul class="list-unstyled">
-                        <li><a href="../front/home.html" class="footer-link">Home</a></li>
-                        <li><a href="../front/productos.html" class="footer-link">Productos</a></li>
-                        <li><a href="../front/contacto.html" class="footer-link">Contacto</a></li>
+                        <li><a href="index.html" class="footer-link">Inicio</a></li>
+                        <li><a href="productos.html" class="footer-link">Productos</a></li>
+                        <li><a href="contacto.html" class="footer-link">Contacto</a></li>
+                        <li><a href="sobre_nosotros.html" class="footer-link">Sobre nosotros</a></li>
                     </ul>
                 </div>
                 <!-- Columna 3: Redes -->
@@ -232,6 +240,7 @@
                         </a>
                     </div>
                 </section>
+
                 <div class="footer-bottom text-center mt-4 pt-3 border-top">
                     <small>&copy; 2025 Merced. Todos los derechos reservados.</small>
                 </div>
