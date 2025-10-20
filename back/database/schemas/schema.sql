@@ -1,59 +1,84 @@
-DROP TABLE IF EXISTS Usuario;
-create table Usuario(
-id_usuario INTEGER primary key AUTOINCREMENT,
-nombre text not null,
-apellido text not null,
-mail text not null unique,
-contraseña text not null,
-rol text not null,
-dni text not null unique
+-- Eliminar tablas si existen
+DROP TABLE IF EXISTS detalle_pedido;
+DROP TABLE IF EXISTS pedido;
+DROP TABLE IF EXISTS detalle_carrito;
+DROP TABLE IF EXISTS carrito;
+DROP TABLE IF EXISTS productos;
+DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS rol;
+
+-- Tabla de roles
+CREATE TABLE rol (
+    id_rol INTEGER PRIMARY KEY,
+    descripcion TEXT NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-create table Producto(
-id_producto INTEGER primary key AUTOINCREMENT,
-nombre text not null,
-descripcion text not null,
-precio real not null check (precio>0),
-stock integer not null check (stock >0),
-categoria text not null
+-- Insertar roles
+INSERT INTO rol (id_rol, descripcion) VALUES (1, 'admin');
+INSERT INTO rol (id_rol, descripcion) VALUES (2, 'usuario');
+
+-- Tabla de usuarios
+CREATE TABLE usuarios (
+    id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    mail TEXT NOT NULL UNIQUE,
+    contrasena TEXT NOT NULL,
+    rol_id INTEGER NOT NULL,
+    dni TEXT NOT NULL UNIQUE,
+    estado INTEGER DEFAULT 1,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (rol_id) REFERENCES rol(id_rol)
 );
 
-create table Carrito(
-id_carrito integer primary key AUTOINCREMENT,
-id_usuario integer not null unique,
-foreign key (id_usuario) references Usuario(id_usuario)
-        on delete cascade 
+-- Tabla de productos
+CREATE TABLE productos (
+    id_producto INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    descripcion TEXT NOT NULL,
+    precio REAL NOT NULL CHECK (precio > 0),
+    stock INTEGER NOT NULL CHECK (stock > 0),
+    categoria TEXT NOT NULL
 );
 
-create table Detalle_carrito(
-id_carrito integer not null,
-id_producto integer not null,
-cantidad integer not null check (cantidad > 0),
-precio_unitario real not null check (precio_unitario > 0),
-subtotal real generated always as (precio_unitario * cantidad) stored,
-primary key (id_carrito, id_producto),
-foreign key (id_carrito) references Carrito(id_carrito) on delete cascade,
-foreign key (id_producto) references Producto(id_producto)
+-- Tabla de carritos
+CREATE TABLE carrito (
+    id_carrito INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuario INTEGER NOT NULL UNIQUE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
-create table Pedido(
-id_pedido integer primary key AUTOINCREMENT,
-id_usuario integer not null,
-fecha date not null,
-estado text not null,
-total real not null check (total>0),
-foreign key (id_usuario) references Usuario(id_usuario) on delete cascade 
-
+-- Detalle del carrito
+CREATE TABLE detalle_carrito (
+    id_carrito INTEGER NOT NULL,
+    id_producto INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL CHECK (cantidad > 0),
+    precio_unitario REAL NOT NULL CHECK (precio_unitario > 0),
+    subtotal REAL, -- si tu SQLite no soporta GENERATED
+    PRIMARY KEY (id_carrito, id_producto),
+    FOREIGN KEY (id_carrito) REFERENCES carrito(id_carrito) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
 
-create table Detalle_pedido(
-id_pedido integer not null,
-id_producto integer not null,
-cantidad integer not null check (cantidad >0),
-precio_unitario real not null check (precio_unitario>0),
-subtotal real generated always as (precio_unitario* cantidad) stored,
-primary key (id_pedido, id_producto),
-foreign key (id_pedido) references Pedido(id_pedido) on delete cascade,
-foreign key (id_producto) references Producto(id_producto)
+-- Tabla de pedidos
+CREATE TABLE pedido (
+    id_pedido INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuario INTEGER NOT NULL,
+    fecha DATE NOT NULL,
+    estado TEXT NOT NULL,
+    total REAL NOT NULL CHECK (total > 0),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
 
+-- Detalle del pedido
+CREATE TABLE detalle_pedido (
+    id_pedido INTEGER NOT NULL,
+    id_producto INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL CHECK (cantidad > 0),
+    precio_unitario REAL NOT NULL CHECK (precio_unitario > 0),
+    subtotal REAL, -- si tu SQLite no soporta GENERATED
+    PRIMARY KEY (id_pedido, id_producto),
+    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );

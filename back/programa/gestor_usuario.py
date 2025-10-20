@@ -10,7 +10,7 @@ class Gestor_usuario:
         conexion = crear_conexion()
         cursor = conexion.cursor()
         cursor.execute("""
-            INSERT INTO Usuario (rol_id, nombre, apellido, mail, contrasena, dni)
+            INSERT INTO usuarios (Rol_Id, Nombre, Apellido, mail, contrasena, DNI)
             VALUES (?, ?, ?, ?, ?, ?)
         """, (2, nombre, apellido, mail, contrasena, dni))
         conexion.commit()
@@ -21,8 +21,8 @@ class Gestor_usuario:
         conexion = crear_conexion()
         cursor = conexion.cursor()
         cursor.execute("""
-            SELECT id_usuario, nombre, apellido, mail, contrasena, dni, rol_id
-            FROM Usuario
+            SELECT Id_Usuario, Nombre, Apellido, mail, contrasena, DNI, Rol_Id
+            FROM usuarios
             WHERE mail = ? AND contrasena = ?
         """, (mail, contrasena))
         fila = cursor.fetchone()
@@ -41,7 +41,7 @@ class Gestor_usuario:
     def listar_usuarios(self):
         conexion = crear_conexion()
         cursor = conexion.cursor()
-        cursor.execute("SELECT * FROM Usuario")
+        cursor.execute("SELECT * FROM usuarios")
         usuarios = cursor.fetchall()
         for u in usuarios:
             print(u)
@@ -52,9 +52,9 @@ class Gestor_usuario:
         conexion = crear_conexion()
         cursor = conexion.cursor()
         cursor.execute("""
-            SELECT id_usuario, nombre, apellido, mail, contrasena, dni, rol_id
-            FROM Usuario
-            WHERE id_usuario = ?
+            SELECT Id_Usuario, Nombre, Apellido, mail, contrasena, DNI, Rol_Id
+            FROM usuarios
+            WHERE Id_Usuario = ?
         """, (id,))
         fila = cursor.fetchone()
         cursor.close()
@@ -67,10 +67,10 @@ class Gestor_usuario:
 
     def modificar_datos(self, id, dato_opcion, dato_valor):
         campos = {
-            1: "nombre",
-            2: "apellido",
+            1: "Nombre",
+            2: "Apellido",
             3: "mail",
-            4: "dni",
+            4: "DNI",
             5: "contrasena"
         }
 
@@ -81,9 +81,9 @@ class Gestor_usuario:
         conexion = crear_conexion()
         cursor = conexion.cursor()
         cursor.execute(f"""
-            UPDATE Usuario
+            UPDATE usuarios
             SET {campo} = ?
-            WHERE id_usuario = ?
+            WHERE Id_Usuario = ?
         """, (dato_valor, id))
         conexion.commit()
         cursor.close()
@@ -95,8 +95,8 @@ class Gestor_usuario:
         conexion = crear_conexion()
         cursor = conexion.cursor()
         cursor.execute("""
-            DELETE FROM Usuario
-            WHERE id_usuario = ?
+            DELETE FROM usuarios
+            WHERE Id_Usuario = ?
         """, (id,))
         conexion.commit()
         cursor.close()
@@ -108,9 +108,9 @@ class Gestor_usuario:
         conexion = crear_conexion()
         cursor = conexion.cursor()
         cursor.execute("""
-            UPDATE Usuario
-            SET rol_id = ?
-            WHERE id_usuario = ?
+            UPDATE usuarios
+            SET Rol_Id = ?
+            WHERE Id_Usuario = ?
         """, (id_rol, id))
         conexion.commit()
         cursor.close()
