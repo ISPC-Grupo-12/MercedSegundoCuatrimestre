@@ -24,6 +24,11 @@ body{
     font-family:var(--font-body);
     margin:0;
 }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 
 /*HEADER*/
 
@@ -106,7 +111,7 @@ header .nav{
 
 /* ------------------------------------------------------------------------------------------------------ */
 
-/* CSS Home/ Inicio */
+/* CSS Home/Inicio */
 /* Todas las imágenes dentro de cualquier carrusel */
 .carousel-inner img {
     width: 100%;
