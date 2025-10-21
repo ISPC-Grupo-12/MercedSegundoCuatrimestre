@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,14 +9,16 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:wght@400;700&display=swap"
+        rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
 
     <!--CSS global -->
     <link rel="stylesheet" href="../css/global.css">
-    
+
 </head>
+
 <body>
     <header>
         <h1 id="header-titulo">Merced</h1>
@@ -30,19 +33,8 @@
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="../productos.html" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">Productos</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="../productos.html">Todos los productos</a></li>
-                    <li><a class="dropdown-item" href="#">Sección 2</a></li>
-                    <li><a class="dropdown-item" href="#">Sección 3</a></li>
-                    <li><a class="dropdown-item" href="#">Sección 4</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Quizás algo más</a></li>
-                </ul>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../productos.html">Productos</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="../sobre_nosotros.html">Sobre Nosotros</a>
@@ -67,14 +59,16 @@
             <section class="col-12 col-lg-6">
                 <div class="producto-media card">
                     <div class="ratio ratio-1x1">
-                        <img id="imgPrincipal" class="producto-img" src="../img/productos/vestido_rojo/vestido_rojo_corto.jpeg" alt="vestido de encaje rojo - imagen principal">
+                        <img id="imgPrincipal" class="producto-img"
+                            src="../img/productos/vestido_rojo/vestido_rojo_corto.jpeg"
+                            alt="vestido de encaje rojo - imagen principal">
                     </div>
                 </div>
             </section>
-    
+
             <!-- Info -->
             <section class="col-12 col-lg-6">
-                <h1 class="producto-titulo" >Vestido de encaje rojo</h1>
+                <h1 class="producto-titulo">Vestido de encaje rojo</h1>
                 <div class="d-flex align-items-center gap-2 mb-2">
                     <div class="text-warning" aria-label="Valoración 4.6 de 5">
                         <i class="fa-solid fa-star"></i>
@@ -107,20 +101,21 @@
                             <label class="talle" for="talle-xl">XL</label>
                         </div>
                     </fieldset>
-        
+
                     <div class="d-flex align-items-center gap-3 mb-4">
                         <label for="cantidad" class="form-label m-0">Cantidad</label>
-                        <input id="cantidad" name="cantidad" type="number" class="form-control cantidad" min="1" value="1" inputmode="numeric" pattern="[0-9]*">
+                        <input id="cantidad" name="cantidad" type="number" class="form-control cantidad" min="1"
+                            value="1" inputmode="numeric" pattern="[0-9]*">
                         <span class="form-text">Límite 5 por compra</span>
                     </div>
-        
+
                     <div class="d-grid d-sm-flex gap-2">
                         <button type="submit" class="btn btn-comprar">
                             <i class="fa-solid fa-bag-shopping me-2"></i>Agregar al carrito
                         </button>
                         <a href="#" class="btn btn-primario">Comprar ahora</a>
                     </div>
-        
+
                     <ul class="list-unstyled d-grid gap-2 mt-4 small text-muted">
                         <li><i class="fa-solid fa-truck me-2"></i>Envíos a todo el país</li>
                         <li><i class="fa-solid fa-rotate-left me-2"></i>Cambios gratis por 30 días</li>
@@ -172,4 +167,5 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
