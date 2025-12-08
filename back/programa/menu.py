@@ -1,8 +1,7 @@
 class Menu:
-    def __init__(self, gestor_usuarios, gestor_productos, gestor_pedidos, validador, usuario_actual=None):
+    def __init__(self, gestor_usuarios, gestor_productos, validador, usuario_actual=None):
         self.gestor_usuarios = gestor_usuarios
         self.gestor_productos = gestor_productos
-        self.gestor_pedidos = gestor_pedidos
         self.validador = validador
         self.usuario_actual = usuario_actual
 
@@ -14,6 +13,7 @@ class Menu:
         for i in range(len(opciones)):
             print(f"{i+1}. {opciones[i]}")
         return self.validador.validar_opcion(1, len(opciones))
+    
 
     def menu_principal(self):
         opciones = ["Iniciar Sesión", "Registrarse"]
@@ -65,12 +65,16 @@ class Menu:
             "Ver todos los productos",
             "Buscar producto por nombre",
             "Filtrar productos por precio",
+            "Filtrar productos por categoria",
             "Crear nuevo producto",
+            "Agregar variante de producto",
             "Eliminar producto",
             "Modificar producto",
-            "Ver Ordenes de compras",
         ]
         roles = ["Estandar", "Admin"]
+        categorias={1:"Remera", 2:"Pantalon", 3:"Zapatillas", 4:"Joyeria", 5:"Campera", 6:"Vestido" } 
+        talles={1:"S", 2:"M", 3:"L", 4:"XL", 5:"XXL"} 
+        colores={1:"negro", 2:"rojo", 3:"verde", 4:"blanco", 5:"azul", 6:"rosa", 7:"morado", 8:"gris"} 
         while True:
             opcion = self.mostrar_menu(opciones[:])
             if opcion == 1:
@@ -128,16 +132,73 @@ class Menu:
                     self.gestor_productos.filtrar_por_precio(minimo, maximo)
                 except ValueError:
                     print("❌ Ingresá valores numéricos válidos.")
+            
             elif opcion == 8:
+                for clave, valor in categorias.items():
+                    print(f"{clave}: {valor}")
+    
+                categoria_opcion=int(input("📑 Selecciona la categoria: "))
+                if(categoria_opcion > len(categorias)+1):
+                        print("❌ Numero invalido")
+                else:
+                    try:
+                        categoria=categorias[categoria_opcion]
+                        self.gestor_productos.filtrar_por_categoria(categoria)
+                    except ValueError:
+                        print("❌ Ingresá valores numéricos válidos.")
+                        
+            elif opcion == 9:
                 nombre = input("📦 Nombre del producto: ")
                 descripcion = input("📝 Descripción: ")
+                for clave, valor in categorias.items():
+                    print(f"{clave}: {valor}")
+    
+                categoria_opcion=int(input("📑 Selecciona la categoria: "))
+                if(categoria_opcion > len(categorias)+1):
+                    print("❌ Numero invalido")
+                else:
+                    try:
+                        categoria=categorias[categoria_opcion]
+                        precio = float(input("💲 Precio: "))
+                        self.gestor_productos.crear_producto(nombre, descripcion, categoria, precio)
+                        print("✅ Producto creado correctamente.")
+                    
+                    except ValueError:
+                        print("❌ Datos inválidos.")
+            
+            elif opcion == 10:
+                id_producto = input("🆔 Id del producto: ")   
                 try:
-                    precio = float(input("💲 Precio: "))
-                    self.gestor_productos.crear_producto(nombre, precio, descripcion)
-                    print("✅ Producto creado correctamente.")
+                    producto=self.gestor_productos.buscar_producto(id_producto)
+                    if not producto:
+                        print("❌ No se encontro un producto con ese id.")
+                        return
+                    else:
+                            for clave, valor in talles.items():
+                                print(f"{clave}: {valor}")  
+                            talle_opcion= int(input("👗 Selecciona el Talle: "))
+                            
+                            if talle_opcion not in talles:
+                                print("❌ Talle inválido.")
+                                return
+                            talle=talles[talle_opcion]
+                            
+                            for clave, valor in colores.items():
+                                print(f"{clave}: {valor}")  
+                            color_opcion=int(input("🎨 Selecciona el Color: "))
+                            
+                            if color_opcion not in colores:
+                                print("❌ Color inválido.")
+                                return
+                            color=colores[color_opcion]
+                            
+                            stock = int(input("📦 Stock: "))
+                            self.gestor_productos.agregar_variante(id_producto=id_producto,talle=talle,color=color,stock=stock)
+                            print("✅ Producto creado correctamente.")
                 except ValueError:
-                    print("❌ Precio inválido.")
-            elif opcion == 9:
+                    print("❌ Debe ingresar un numero.")
+       
+            elif opcion == 11:
                 try:
                     id_producto = int(input("🗑️ Ingrese el ID del producto que desea eliminar: "))
                     confirmacion = self.mostrar_menu(["Confirmar eliminación"])
@@ -148,7 +209,7 @@ class Menu:
                             print(f"❌ No se encontró ningún producto con el ID: {id_producto}")
                 except ValueError:
                     print("❌ ID inválido. Ingresá un número.")
-            elif opcion == 10:
+            elif opcion == 12:
                 try:
                     id_producto = int(input("🛠️ Ingrese el ID del producto que desea modificar: "))
                     campo_opcion = self.mostrar_menu(["Modificar nombre", "Modificar precio", "Modificar descripción", "Modificar imagen"])
@@ -178,15 +239,7 @@ class Menu:
                             print("✅ Producto modificado correctamente.")
                         else:
                             print(f"❌ No se encontró ningún producto con el ID: {id_producto}")
-            elif opcion == 11:
-                        pedidos = self.gestor_pedidos.ver_todos_los_pedidos()
-                        if pedidos:
-                            print("📋 Pedidos registrados:")
-                        for p in pedidos:
-                            print(f"🆔 {p[0]} | 👤 {p[1]} | 📦 {p[2]} | 📅 {p[3]}")
-                        else:
-                            print("❌ No hay pedidos registrados.")
-            elif opcion == 12:
+            elif opcion == 13:
                 self.usuario_actual = None
                 break                
 
@@ -198,16 +251,17 @@ class Menu:
             "Ver todos los productos",
             "Buscar producto por nombre",
             "Filtrar productos por precio",
-            "Realizar pedido",
-            "Ver mis pedidos",
+            "Filtrar productos por categoria"
         ]
         opciones_datos = [
             "Modificar el nombre",
             "Modificar el apellido",
-            "Modificar el DNI",
             "Modificar el mail",
+            "Modificar el DNI",
             "Modificar la contrasena",
         ]
+    
+        categorias={1:"Remera", 2:"Pantalon", 3:"Zapatillas", 4:"Joyeria", 5:"Campera", 6:"Vestido" } 
         while True:
             opcion = self.mostrar_menu(opciones[:])
             if opcion == 1:
@@ -242,20 +296,19 @@ class Menu:
                 except ValueError:
                     print("❌ Ingresá valores numéricos válidos.")
             elif opcion == 6:
-                try:
-                    id_producto = int(input("🛒 Ingrese el ID del producto que desea comprar: "))
-                    self.gestor_pedidos.realizar_pedido(self.usuario_actual.id, id_producto)
-                    print("✅ Pedido realizado correctamente.")
-                except ValueError:
-                    print("❌ ID inválido. Ingresá un número.")
-            elif opcion == 7:
-                pedidos = self.gestor_pedidos.ver_pedidos_por_usuario(self.usuario_actual.id)
-                if pedidos:
-                    print("📦 Tus pedidos realizados:")
-                    for p in pedidos:
-                        print(f"🆔 {p[0]} | Producto: {p[1]} | Fecha: {p[2]}")
+                for clave, valor in categorias.items():
+                    print(f"{clave}: {valor}")
+    
+                categoria_opcion=int(input("📑 Selecciona la categoria: "))
+                if(categoria_opcion > len(categorias)+1):
+                        print("❌ Numero invalido")
                 else:
-                    print("❌ No se encontraron pedidos registrados.")
+                    try:
+                        categoria=categorias[categoria_opcion]
+                        self.gestor_productos.filtrar_por_categoria(categoria)
+                    except ValueError:
+                        print("❌ Ingresá valores numéricos válidos.")   
+                    
             else:
                 self.usuario_actual = None
                 break

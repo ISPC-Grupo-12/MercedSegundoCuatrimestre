@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="merced.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2711"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="sqlite_sequence" custom_title="0" dock_id="1" table="4,15:mainsqlite_sequence"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000011800ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">
+-- Tabla de roles (opcional, si querés mantenerla separada)
+CREATE TABLE rol (
+    id_rol INTEGER PRIMARY KEY,
+    descripcion TEXT NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insertar roles
+INSERT INTO rol (id_rol, descripcion) VALUES (1, 'admin');
+INSERT INTO rol (id_rol, descripcion) VALUES (2, 'usuario');
+
+-- Tabla de usuarios con campos extendidos
+CREATE TABLE Usuario (
+    id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    mail TEXT NOT NULL UNIQUE,
+    contrasena TEXT NOT NULL,
+    rol_id INTEGER NOT NULL,
+    dni TEXT NOT NULL UNIQUE,
+    estado INTEGER DEFAULT 1,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (rol_id) REFERENCES rol(id_rol)
+);
+
+-- Tabla de productos
+CREATE TABLE Producto (
+    id_producto INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    descripcion TEXT NOT NULL,
+    precio REAL NOT NULL CHECK (precio &gt; 0),
+    stock INTEGER NOT NULL CHECK (stock &gt; 0),
+    categoria TEXT NOT NULL
+);
+
+-- Tabla de carritos
+CREATE TABLE Carrito (
+    id_carrito INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuario INTEGER NOT NULL UNIQUE,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) ON DELETE CASCADE
+);
+
+-- Detalle del carrito
+CREATE TABLE Detalle_carrito (
+    id_carrito INTEGER NOT NULL,
+    id_producto INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL CHECK (cantidad &gt; 0),
+    precio_unitario REAL NOT NULL CHECK (precio_unitario &gt; 0),
+    subtotal REAL GENERATED ALWAYS AS (precio_unitario * cantidad) STORED,
+    PRIMARY KEY (id_carrito, id_producto),
+    FOREIGN KEY (id_carrito) REFERENCES Carrito(id_carrito) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+);
+
+-- Tabla de pedidos
+CREATE TABLE Pedido (
+    id_pedido INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuario INTEGER NOT NULL,
+    fecha DATE NOT NULL,
+    estado TEXT NOT NULL,
+    total REAL NOT NULL CHECK (total &gt; 0),
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) ON DELETE CASCADE
+);
+
+-- Detalle del pedido
+CREATE TABLE Detalle_pedido (
+    id_pedido INTEGER NOT NULL,
+    id_producto INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL CHECK (cantidad &gt; 0),
+    precio_unitario REAL NOT NULL CHECK (precio_unitario &gt; 0),
+    subtotal REAL GENERATED ALWAYS AS (precio_unitario * cantidad) STORED,
+    PRIMARY KEY (id_pedido, id_producto),
+    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+);
+
+
+
+
+
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

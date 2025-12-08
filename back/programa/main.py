@@ -1,7 +1,6 @@
 from persistencia import crear_tablas
 from gestor_usuario import Gestor_usuario
 from gestor_producto import Gestor_producto
-from gestor_pedido import Gestor_pedido
 from validador import Validador
 from menu import Menu
 
@@ -15,13 +14,11 @@ def main():
 
     gestor_usuarios = Gestor_usuario()
     gestor_productos = Gestor_producto()
-    gestor_pedidos = Gestor_pedido()
     validador = Validador()
 
     menu = Menu(
         gestor_usuarios=gestor_usuarios,
         gestor_productos=gestor_productos,
-        gestor_pedidos=gestor_pedidos,
         validador=validador
     )
 

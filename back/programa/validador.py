@@ -20,7 +20,7 @@ class Validador:
     def validar_mail_repetido(self, mail):
         conexion = crear_conexion()
         cursor = conexion.cursor()
-        cursor.execute("SELECT 1 FROM usuarios WHERE mail = ?", (mail,))
+        cursor.execute("SELECT 1 FROM Usuario WHERE mail = ?", (mail,))
         resultado = cursor.fetchone()
         cursor.close()
         conexion.close()
@@ -43,7 +43,7 @@ class Validador:
             return False
         conexion = crear_conexion()
         cursor = conexion.cursor()
-        cursor.execute("SELECT 1 FROM usuarios WHERE DNI = ?", (dni,))
+        cursor.execute("SELECT 1 FROM Usuario WHERE dni = ?", (dni,))
         resultado = cursor.fetchone()
         cursor.close()
         conexion.close()

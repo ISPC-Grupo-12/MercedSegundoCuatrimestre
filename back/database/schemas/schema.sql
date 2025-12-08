@@ -1,84 +1,120 @@
--- Eliminar tablas si existen
-DROP TABLE IF EXISTS detalle_pedido;
-DROP TABLE IF EXISTS pedido;
-DROP TABLE IF EXISTS detalle_carrito;
-DROP TABLE IF EXISTS carrito;
-DROP TABLE IF EXISTS productos;
-DROP TABLE IF EXISTS usuarios;
-DROP TABLE IF EXISTS rol;
+--Schema realizado en mysql para crear el modelo relacional
+-- Eliminamos las tablas si existen 
+DROP TABLE IF EXISTS Detalle_pedido;
+DROP TABLE IF EXISTS Pedido;
+DROP TABLE IF EXISTS Detalle_carrito;
+DROP TABLE IF EXISTS Carrito;
+DROP TABLE IF EXISTS Variante_producto;
+DROP TABLE IF EXISTS Producto;
+DROP TABLE IF EXISTS Usuario;
+DROP TABLE IF EXISTS Rol;
 
--- Tabla de roles
-CREATE TABLE rol (
-    id_rol INTEGER PRIMARY KEY,
-    descripcion TEXT NOT NULL,
+-- Tabla Rol
+CREATE TABLE Rol (
+    id_rol INT PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL,
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+)
 
--- Insertar roles
-INSERT INTO rol (id_rol, descripcion) VALUES (1, 'admin');
-INSERT INTO rol (id_rol, descripcion) VALUES (2, 'usuario');
+-- Valores de Rol por defecto
+INSERT INTO Rol (id_rol, descripcion)
+VALUES (1, 'admin'), (2, 'usuario');
 
--- Tabla de usuarios
-CREATE TABLE usuarios (
-    id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    apellido TEXT NOT NULL,
-    mail TEXT NOT NULL UNIQUE,
-    contrasena TEXT NOT NULL,
-    rol_id INTEGER NOT NULL,
-    dni TEXT NOT NULL UNIQUE,
-    estado INTEGER DEFAULT 1,
+-- Tabla Usuario
+CREATE TABLE Usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    mail VARCHAR(150) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL,
+    dni VARCHAR(20) NOT NULL UNIQUE,
+    rol_id INT NOT NULL,
+    estado TINYINT DEFAULT 1,
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (rol_id) REFERENCES rol(id_rol)
-);
+    CONSTRAINT fk_usuario_rol
+        FOREIGN KEY (rol_id) REFERENCES Rol(id_rol)
+)
 
--- Tabla de productos
-CREATE TABLE productos (
-    id_producto INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
+-- Tabla Producto
+CREATE TABLE Producto (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL,
     descripcion TEXT NOT NULL,
-    precio REAL NOT NULL CHECK (precio > 0),
-    stock INTEGER NOT NULL CHECK (stock > 0),
-    categoria TEXT NOT NULL
-);
+    categoria VARCHAR(100),
+    precio DECIMAL(10,2) NOT NULL CHECK (precio > 0)
+) 
 
--- Tabla de carritos
-CREATE TABLE carrito (
-    id_carrito INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_usuario INTEGER NOT NULL UNIQUE,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
-);
+-- Tabla de las Variantes de los productos
+CREATE TABLE Variante_producto (
+    id_variante INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT NOT NULL,
+    talle VARCHAR(10) NOT NULL,
+    color VARCHAR(50) NOT NULL,
+    stock INT NOT NULL CHECK (stock >= 0),
+    CONSTRAINT fk_variante_producto
+        FOREIGN KEY (id_producto)
+        REFERENCES Producto(id_producto)
+        ON DELETE CASCADE,
+    CONSTRAINT uq_producto_talle_color
+        UNIQUE (id_producto, talle, color)
+)
 
--- Detalle del carrito
-CREATE TABLE detalle_carrito (
-    id_carrito INTEGER NOT NULL,
-    id_producto INTEGER NOT NULL,
-    cantidad INTEGER NOT NULL CHECK (cantidad > 0),
-    precio_unitario REAL NOT NULL CHECK (precio_unitario > 0),
-    subtotal REAL, -- si tu SQLite no soporta GENERATED
-    PRIMARY KEY (id_carrito, id_producto),
-    FOREIGN KEY (id_carrito) REFERENCES carrito(id_carrito) ON DELETE CASCADE,
-    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
-);
 
--- Tabla de pedidos
-CREATE TABLE pedido (
-    id_pedido INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_usuario INTEGER NOT NULL,
+-- Tabla Carrito(unico)
+CREATE TABLE Carrito (
+    id_carrito INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL UNIQUE,
+    CONSTRAINT fk_carrito_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES Usuario(id_usuario)
+        ON DELETE CASCADE
+)
+
+-- Detalles del carrito
+CREATE TABLE Detalle_carrito (
+    id_carrito INT NOT NULL,
+    id_variante INT NOT NULL,
+    cantidad INT NOT NULL CHECK (cantidad > 0),
+    precio_unitario DECIMAL(10,2) NOT NULL CHECK (precio_unitario > 0),
+    subtotal DECIMAL(10,2)
+        GENERATED ALWAYS AS (cantidad * precio_unitario) STORED,
+    PRIMARY KEY (id_carrito, id_variante),
+    CONSTRAINT fk_detalle_carrito_carrito
+        FOREIGN KEY (id_carrito)
+        REFERENCES Carrito(id_carrito)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_detalle_carrito_variante
+        FOREIGN KEY (id_variante)
+        REFERENCES Variante_producto(id_variante)
+)
+
+-- Tabla Pedido
+CREATE TABLE Pedido (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
     fecha DATE NOT NULL,
-    estado TEXT NOT NULL,
-    total REAL NOT NULL CHECK (total > 0),
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
-);
+    estado VARCHAR(50) NOT NULL,
+    total DECIMAL(10,2) NOT NULL CHECK (total > 0),
+    CONSTRAINT fk_pedido_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES Usuario(id_usuario)
+        ON DELETE CASCADE
+)
 
--- Detalle del pedido
-CREATE TABLE detalle_pedido (
-    id_pedido INTEGER NOT NULL,
-    id_producto INTEGER NOT NULL,
-    cantidad INTEGER NOT NULL CHECK (cantidad > 0),
-    precio_unitario REAL NOT NULL CHECK (precio_unitario > 0),
-    subtotal REAL, -- si tu SQLite no soporta GENERATED
-    PRIMARY KEY (id_pedido, id_producto),
-    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE,
-    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
-);
+-- Detalles de los pedidos
+CREATE TABLE Detalle_pedido (
+    id_pedido INT NOT NULL,
+    id_variante INT NOT NULL,
+    cantidad INT NOT NULL CHECK (cantidad > 0),
+    precio_unitario DECIMAL(10,2) NOT NULL CHECK (precio_unitario > 0),
+    subtotal DECIMAL(10,2)
+        GENERATED ALWAYS AS (cantidad * precio_unitario) STORED,
+    PRIMARY KEY (id_pedido, id_variante),
+    CONSTRAINT fk_det_pedido_pedido
+        FOREIGN KEY (id_pedido)
+        REFERENCES Pedido(id_pedido)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_det_pedido_variante
+        FOREIGN KEY (id_variante)
+        REFERENCES Variante_producto(id_variante)
+)
